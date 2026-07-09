@@ -15,11 +15,12 @@ hierarchies:
     parallel_periods:
     - key_columns:
       - prior_fiscal_year_num
+      - fiscal_quarter
       level: Fiscal Year
   - unique_name: Fiscal Month
     parallel_periods:
     - key_columns:
-      - prior_fiscal_year_num
+      - prior_year_month_start_key
       level: Fiscal Year
     secondary_attributes:
     - unique_name: Month Name
@@ -28,7 +29,7 @@ hierarchies:
       dataset: dim_date
       folder: Date
       key_columns:
-      - month_start_key
+      - month_number
       name_column: month_name
   - unique_name: Day
 - unique_name: Calendar
@@ -42,11 +43,12 @@ hierarchies:
     parallel_periods:
     - key_columns:
       - prior_year_num
+      - calendar_quarter
       level: Year
   - unique_name: Month
     parallel_periods:
     - key_columns:
-      - prior_year_num
+      - prior_year_month_start_key
       level: Year
   - unique_name: Day
 level_attributes:

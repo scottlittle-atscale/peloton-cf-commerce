@@ -61,3 +61,9 @@ columns:
   dialects:
   - dialect: BigQuery
     sql: CAST(calendar_year AS STRING)
+- name: prior_year_month_start_key
+  data_type: long
+  sql: (calendar_year - 1) * 10000 + month_number * 100 + 1
+  dialects:
+  - dialect: BigQuery
+    sql: (calendar_year - 1) * 10000 + month_number * 100 + 1

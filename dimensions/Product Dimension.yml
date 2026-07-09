@@ -18,7 +18,7 @@ hierarchies:
       dataset: dim_product
       folder: Product
       key_columns:
-      - product_key
+      - condition
       name_column: condition
     - unique_name: Refurbished Flag
       label: Refurbished Flag
@@ -26,7 +26,7 @@ hierarchies:
       dataset: dim_product
       folder: Product
       key_columns:
-      - product_key
+      - is_refurbished
       name_column: is_refurbished
 level_attributes:
 - unique_name: Product Line

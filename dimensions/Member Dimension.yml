@@ -17,7 +17,7 @@ hierarchies:
       dataset: dim_member
       folder: Member
       key_columns:
-      - member_key
+      - membership_status
       name_column: membership_status
 level_attributes:
 - unique_name: Member Segment
