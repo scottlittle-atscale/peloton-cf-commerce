@@ -1,0 +1,10 @@
+unique_name: MRR Change
+object_type: metric
+label: MRR Change
+description: Signed MRR change from events (+new, -cancel).
+calculation_method: sum
+format: $#,##0.00
+unrelated_dimensions_handling: repeat
+folder: Subscription Metrics
+dataset: fact_subscription_events
+column: mrr_delta

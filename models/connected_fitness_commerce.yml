@@ -1,0 +1,233 @@
+unique_name: connected_fitness_commerce
+object_type: model
+label: Connected Fitness Commercial
+description: 'Connected Fitness Commercial model: hardware sales and subscription/membership analytics. Conformed star over four facts (sales orders, subscription events, monthly subscription snapshot, member master). Fiscal calendar ends June 30.'
+visible: true
+relationships:
+- unique_name: fact_sales_orders_Date_Dimension
+  from:
+    dataset: fact_sales_orders
+    join_columns:
+    - date_key
+  to:
+    dimension: Date Dimension
+    level: Day
+- unique_name: fact_sales_orders_Product_Dimension
+  from:
+    dataset: fact_sales_orders
+    join_columns:
+    - product_key
+  to:
+    dimension: Product Dimension
+    level: Product
+- unique_name: fact_sales_orders_Geography_Dimension
+  from:
+    dataset: fact_sales_orders
+    join_columns:
+    - geography_key
+  to:
+    dimension: Geography Dimension
+    level: Country
+- unique_name: fact_sales_orders_Channel_Dimension
+  from:
+    dataset: fact_sales_orders
+    join_columns:
+    - channel_key
+  to:
+    dimension: Channel Dimension
+    level: Channel
+- unique_name: fact_sales_orders_Member_Dimension
+  from:
+    dataset: fact_sales_orders
+    join_columns:
+    - member_key
+  to:
+    dimension: Member Dimension
+    level: Member
+- unique_name: fact_subscription_events_Date_Dimension
+  from:
+    dataset: fact_subscription_events
+    join_columns:
+    - event_date_key
+  to:
+    dimension: Date Dimension
+    level: Day
+- unique_name: fact_subscription_events_Plan_Dimension
+  from:
+    dataset: fact_subscription_events
+    join_columns:
+    - plan_key
+  to:
+    dimension: Plan Dimension
+    level: Plan
+- unique_name: fact_subscription_events_Geography_Dimension
+  from:
+    dataset: fact_subscription_events
+    join_columns:
+    - geography_key
+  to:
+    dimension: Geography Dimension
+    level: Country
+- unique_name: fact_subscription_events_Channel_Dimension
+  from:
+    dataset: fact_subscription_events
+    join_columns:
+    - channel_key
+  to:
+    dimension: Channel Dimension
+    level: Channel
+- unique_name: fact_subscription_events_Member_Dimension
+  from:
+    dataset: fact_subscription_events
+    join_columns:
+    - member_key
+  to:
+    dimension: Member Dimension
+    level: Member
+- unique_name: fact_subscription_snapshot_Date_Dimension
+  from:
+    dataset: fact_subscription_snapshot
+    join_columns:
+    - snapshot_date_key
+  to:
+    dimension: Date Dimension
+    level: Day
+- unique_name: fact_subscription_snapshot_Plan_Dimension
+  from:
+    dataset: fact_subscription_snapshot
+    join_columns:
+    - plan_key
+  to:
+    dimension: Plan Dimension
+    level: Plan
+- unique_name: fact_subscription_snapshot_Geography_Dimension
+  from:
+    dataset: fact_subscription_snapshot
+    join_columns:
+    - geography_key
+  to:
+    dimension: Geography Dimension
+    level: Country
+- unique_name: fact_subscription_snapshot_Channel_Dimension
+  from:
+    dataset: fact_subscription_snapshot
+    join_columns:
+    - channel_key
+  to:
+    dimension: Channel Dimension
+    level: Channel
+- unique_name: dim_member_Member_Dimension
+  from:
+    dataset: dim_member
+    join_columns:
+    - member_key
+  to:
+    dimension: Member Dimension
+    level: Member
+- unique_name: dim_member_Date_Dimension
+  from:
+    dataset: dim_member
+    join_columns:
+    - join_date_key
+  to:
+    dimension: Date Dimension
+    level: Day
+- unique_name: dim_member_Product_Dimension
+  from:
+    dataset: dim_member
+    join_columns:
+    - initial_product_key
+  to:
+    dimension: Product Dimension
+    level: Product
+- unique_name: dim_member_Geography_Dimension
+  from:
+    dataset: dim_member
+    join_columns:
+    - geography_key
+  to:
+    dimension: Geography Dimension
+    level: Country
+- unique_name: dim_member_Channel_Dimension
+  from:
+    dataset: dim_member
+    join_columns:
+    - acquisition_channel_key
+  to:
+    dimension: Channel Dimension
+    level: Channel
+- unique_name: dim_member_Plan_Dimension
+  from:
+    dataset: dim_member
+    join_columns:
+    - plan_key
+  to:
+    dimension: Plan Dimension
+    level: Plan
+metrics:
+- unique_name: Order Count
+  folder: Sales Metrics
+- unique_name: Units Sold
+  folder: Sales Metrics
+- unique_name: Gross Revenue
+  folder: Sales Metrics
+- unique_name: Discount Amount
+  folder: Sales Metrics
+- unique_name: Net Revenue
+  folder: Sales Metrics
+- unique_name: Returned Amount
+  folder: Sales Metrics
+- unique_name: Returned Orders
+  folder: Sales Metrics
+- unique_name: Financed Orders
+  folder: Sales Metrics
+- unique_name: Active Subscriptions
+  folder: Subscription Metrics
+- unique_name: MRR
+  folder: Subscription Metrics
+- unique_name: New Subscriptions
+  folder: Subscription Metrics
+- unique_name: Churned Subscriptions
+  folder: Subscription Metrics
+- unique_name: Net New Subscriptions
+  folder: Subscription Metrics
+- unique_name: Subscription Events
+  folder: Subscription Metrics
+- unique_name: New Subscription Events
+  folder: Subscription Metrics
+- unique_name: Cancellation Events
+  folder: Subscription Metrics
+- unique_name: MRR Change
+  folder: Subscription Metrics
+- unique_name: Member Count
+  folder: Membership Metrics
+- unique_name: Active Members
+  folder: Membership Metrics
+- unique_name: Total Tenure Months
+  folder: Membership Metrics
+- unique_name: Average Order Value
+  folder: Time Intelligence
+- unique_name: Return Rate
+  folder: Time Intelligence
+- unique_name: Net Revenue Prior Year
+  folder: Time Intelligence
+- unique_name: Net Revenue YoY %
+  folder: Time Intelligence
+- unique_name: Units Sold Prior Year
+  folder: Time Intelligence
+- unique_name: Units Sold YoY %
+  folder: Time Intelligence
+- unique_name: MRR Prior Year
+  folder: Time Intelligence
+- unique_name: MRR YoY %
+  folder: Time Intelligence
+- unique_name: Monthly Churn Rate
+  folder: Time Intelligence
+- unique_name: Net New Subscriptions Prior Period
+  folder: Time Intelligence
+- unique_name: Net New Subscriptions MoM Change
+  folder: Time Intelligence
+- unique_name: Average Tenure Months
+  folder: Time Intelligence
+- unique_name: Member Retention Rate
+  folder: Time Intelligence

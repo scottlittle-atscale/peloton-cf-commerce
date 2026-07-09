@@ -1,0 +1,6 @@
+unique_name: Average Tenure Months
+object_type: metric_calc
+label: Average Tenure Months
+description: Average months subscribed per member.
+expression: CASE WHEN [Measures].[Member Count] = 0 THEN NULL ELSE [Measures].[Total Tenure Months] / [Measures].[Member Count] END
+format: '#,##0.0'

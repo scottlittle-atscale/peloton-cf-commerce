@@ -1,0 +1,28 @@
+unique_name: Channel Dimension
+object_type: dimension
+label: Channel Dimension
+description: Channel type rolls up to channel.
+type: standard
+hierarchies:
+- unique_name: Channel Hierarchy
+  label: Channel Hierarchy
+  folder: Channel
+  levels:
+  - unique_name: Channel Type
+  - unique_name: Channel
+level_attributes:
+- unique_name: Channel Type
+  label: Channel Type
+  description: Direct / Retail / Partner / Commercial.
+  dataset: dim_channel
+  key_columns:
+  - channel_type
+  name_column: channel_type
+- unique_name: Channel
+  label: Channel
+  description: Sales / acquisition channel.
+  dataset: dim_channel
+  is_unique_key: true
+  key_columns:
+  - channel_key
+  name_column: channel_name

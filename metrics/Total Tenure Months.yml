@@ -1,0 +1,10 @@
+unique_name: Total Tenure Months
+object_type: metric
+label: Total Tenure Months
+description: Sum of member tenure months (basis for average tenure).
+calculation_method: sum
+format: '#,##0'
+unrelated_dimensions_handling: repeat
+folder: Membership Metrics
+dataset: dim_member
+column: tenure_months

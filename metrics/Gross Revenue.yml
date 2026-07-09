@@ -1,0 +1,10 @@
+unique_name: Gross Revenue
+object_type: metric
+label: Gross Revenue
+description: List price x quantity before discounts.
+calculation_method: sum
+format: $#,##0.00
+unrelated_dimensions_handling: repeat
+folder: Sales Metrics
+dataset: fact_sales_orders
+column: gross_revenue

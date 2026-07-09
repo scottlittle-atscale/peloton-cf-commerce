@@ -1,0 +1,6 @@
+unique_name: Net Revenue YoY %
+object_type: metric_calc
+label: Net Revenue YoY %
+description: Year-over-year growth in net revenue (fiscal).
+expression: CASE WHEN ISEMPTY([Measures].[Net Revenue Prior Year]) OR [Measures].[Net Revenue Prior Year] = 0 THEN NULL ELSE ([Measures].[Net Revenue] - [Measures].[Net Revenue Prior Year]) / [Measures].[Net Revenue Prior Year] END
+format: percent

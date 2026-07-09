@@ -1,0 +1,6 @@
+unique_name: Member Retention Rate
+object_type: metric_calc
+label: Member Retention Rate
+description: Share of members still active as of the latest snapshot.
+expression: CASE WHEN [Measures].[Member Count] = 0 THEN NULL ELSE [Measures].[Active Members] / [Measures].[Member Count] END
+format: percent

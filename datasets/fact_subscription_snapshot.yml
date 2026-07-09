@@ -1,0 +1,27 @@
+unique_name: fact_subscription_snapshot
+object_type: dataset
+label: fact_subscription_snapshot
+description: 'Monthly subscription snapshot: active/MRR balances (semi-additive) and flows.'
+connection_id: connection_connected_fitness
+table: fact_subscription_snapshot
+columns:
+- name: snapshot_key
+  data_type: long
+- name: snapshot_date_key
+  data_type: long
+- name: plan_key
+  data_type: long
+- name: geography_key
+  data_type: long
+- name: channel_key
+  data_type: long
+- name: active_subscriptions
+  data_type: long
+- name: mrr
+  data_type: decimal(18,2)
+- name: new_subscriptions
+  data_type: long
+- name: churned_subscriptions
+  data_type: long
+- name: net_new_subscriptions
+  data_type: long

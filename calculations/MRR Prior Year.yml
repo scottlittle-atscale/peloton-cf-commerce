@@ -1,0 +1,6 @@
+unique_name: MRR Prior Year
+object_type: metric_calc
+label: MRR Prior Year
+description: MRR one fiscal year earlier.
+expression: CASE WHEN ISEMPTY([Measures].[MRR]) THEN NULL ELSE (ParallelPeriod([Date Dimension].[Fiscal Calendar].[Fiscal Year], 1, [Date Dimension].[Fiscal Calendar].CurrentMember), [Measures].[MRR]) END
+format: $#,##0.00

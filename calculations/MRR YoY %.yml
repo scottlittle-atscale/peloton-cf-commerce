@@ -1,0 +1,6 @@
+unique_name: MRR YoY %
+object_type: metric_calc
+label: MRR YoY %
+description: Year-over-year MRR growth.
+expression: CASE WHEN ISEMPTY([Measures].[MRR Prior Year]) OR [Measures].[MRR Prior Year] = 0 THEN NULL ELSE ([Measures].[MRR] - [Measures].[MRR Prior Year]) / [Measures].[MRR Prior Year] END
+format: percent

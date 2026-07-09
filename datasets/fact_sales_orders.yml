@@ -1,0 +1,49 @@
+unique_name: fact_sales_orders
+object_type: dataset
+label: fact_sales_orders
+description: Sales order lines (equipment / accessory / apparel) at transaction grain.
+connection_id: connection_connected_fitness
+table: fact_sales_orders
+columns:
+- name: order_key
+  data_type: long
+- name: member_key
+  data_type: long
+- name: product_key
+  data_type: long
+- name: date_key
+  data_type: long
+- name: geography_key
+  data_type: long
+- name: channel_key
+  data_type: long
+- name: order_type
+  data_type: string
+- name: quantity
+  data_type: long
+- name: unit_price
+  data_type: decimal(18,2)
+- name: gross_revenue
+  data_type: decimal(18,2)
+- name: discount_amount
+  data_type: decimal(18,2)
+- name: net_revenue
+  data_type: decimal(18,2)
+- name: is_financed
+  data_type: boolean
+- name: is_returned
+  data_type: boolean
+- name: returned_amount
+  data_type: decimal(18,2)
+- name: is_returned_int
+  data_type: long
+  sql: CASE WHEN is_returned THEN 1 ELSE 0 END
+  dialects:
+  - dialect: BigQuery
+    sql: CASE WHEN is_returned THEN 1 ELSE 0 END
+- name: is_financed_int
+  data_type: long
+  sql: CASE WHEN is_financed THEN 1 ELSE 0 END
+  dialects:
+  - dialect: BigQuery
+    sql: CASE WHEN is_financed THEN 1 ELSE 0 END

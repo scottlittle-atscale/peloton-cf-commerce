@@ -1,0 +1,112 @@
+erDiagram
+    dim_date {
+        int64  date_key PK
+        date   full_date
+        int64  month_number
+        int64  calendar_year
+        int64  fiscal_year
+        int64  fiscal_quarter
+        string fiscal_year_label
+        bool   is_holiday_season
+    }
+    dim_geography {
+        int64  geography_key PK
+        string region
+        string country
+    }
+    dim_channel {
+        int64  channel_key PK
+        string channel_name
+        string channel_type
+    }
+    dim_subscription_plan {
+        int64   plan_key PK
+        string  plan_name
+        string  plan_type
+        numeric monthly_price
+    }
+    dim_product {
+        int64   product_key PK
+        string  product_name
+        string  product_category
+        string  product_line
+        string  condition
+        bool    is_refurbished
+        numeric list_price
+        date    launch_date
+    }
+    dim_member {
+        int64  member_key PK
+        int64  join_date_key FK
+        int64  join_month_key
+        int64  geography_key FK
+        int64  acquisition_channel_key FK
+        int64  plan_key FK
+        string member_segment
+        int64  initial_product_key FK
+        int64  tenure_months
+        bool   is_active_current
+    }
+    fact_sales_orders {
+        int64   order_key PK
+        int64   member_key FK
+        int64   product_key FK
+        int64   date_key FK
+        int64   geography_key FK
+        int64   channel_key FK
+        string  order_type
+        int64   quantity
+        numeric gross_revenue
+        numeric discount_amount
+        numeric net_revenue
+        bool    is_financed
+        bool    is_returned
+        numeric returned_amount
+    }
+    fact_subscription_events {
+        int64   event_key PK
+        int64   member_key FK
+        int64   event_date_key FK
+        int64   plan_key FK
+        int64   geography_key FK
+        int64   channel_key FK
+        string  event_type
+        numeric mrr_delta
+        int64   cohort_month_key
+        int64   event_count
+    }
+    fact_subscription_snapshot {
+        int64   snapshot_key PK
+        int64   snapshot_date_key FK
+        int64   plan_key FK
+        int64   geography_key FK
+        int64   channel_key FK
+        int64   active_subscriptions
+        numeric mrr
+        int64   new_subscriptions
+        int64   churned_subscriptions
+        int64   net_new_subscriptions
+    }
+
+    dim_member              ||--o{ fact_sales_orders : "member_key"
+    dim_product             ||--o{ fact_sales_orders : "product_key"
+    dim_date                ||--o{ fact_sales_orders : "date_key"
+    dim_geography           ||--o{ fact_sales_orders : "geography_key"
+    dim_channel             ||--o{ fact_sales_orders : "channel_key"
+
+    dim_member              ||--o{ fact_subscription_events : "member_key"
+    dim_date                ||--o{ fact_subscription_events : "event_date_key"
+    dim_subscription_plan   ||--o{ fact_subscription_events : "plan_key"
+    dim_geography           ||--o{ fact_subscription_events : "geography_key"
+    dim_channel             ||--o{ fact_subscription_events : "channel_key"
+
+    dim_date                ||--o{ fact_subscription_snapshot : "snapshot_date_key"
+    dim_subscription_plan   ||--o{ fact_subscription_snapshot : "plan_key"
+    dim_geography           ||--o{ fact_subscription_snapshot : "geography_key"
+    dim_channel             ||--o{ fact_subscription_snapshot : "channel_key"
+
+    dim_geography           ||--o{ dim_member : "geography_key"
+    dim_channel             ||--o{ dim_member : "acquisition_channel_key"
+    dim_subscription_plan   ||--o{ dim_member : "plan_key"
+    dim_product             ||--o{ dim_member : "initial_product_key"
+    dim_date                ||--o{ dim_member : "join_date_key"

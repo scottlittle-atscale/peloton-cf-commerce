@@ -1,0 +1,10 @@
+unique_name: Returned Amount
+object_type: metric
+label: Returned Amount
+description: Net revenue of returned orders.
+calculation_method: sum
+format: $#,##0.00
+unrelated_dimensions_handling: repeat
+folder: Sales Metrics
+dataset: fact_sales_orders
+column: returned_amount

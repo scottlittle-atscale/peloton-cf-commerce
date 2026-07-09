@@ -1,0 +1,9 @@
+unique_name: Order Count
+object_type: metric
+label: Order Count
+description: Number of sales order lines.
+calculation_method: count non-null
+unrelated_dimensions_handling: repeat
+folder: Sales Metrics
+dataset: fact_sales_orders
+column: order_key

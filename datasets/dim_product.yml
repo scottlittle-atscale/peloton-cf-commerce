@@ -1,0 +1,25 @@
+unique_name: dim_product
+object_type: dataset
+label: dim_product
+description: 'Product SKUs: model x condition, plus accessories, apparel, and Precor.'
+connection_id: connection_connected_fitness
+table: dim_product
+columns:
+- name: product_key
+  data_type: long
+- name: product_name
+  data_type: string
+- name: product_display_name
+  data_type: string
+- name: product_category
+  data_type: string
+- name: product_line
+  data_type: string
+- name: condition
+  data_type: string
+- name: is_refurbished
+  data_type: boolean
+- name: list_price
+  data_type: decimal(18,2)
+- name: launch_date
+  data_type: date

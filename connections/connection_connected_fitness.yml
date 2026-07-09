@@ -1,0 +1,6 @@
+unique_name: connection_connected_fitness
+label: Connected Fitness Commercial Connection
+object_type: connection
+as_connection: BigQuery
+database: atscale-sales-demo
+schema: PELOTON_CF_COMMERCE_DEMO

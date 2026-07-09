@@ -1,0 +1,10 @@
+unique_name: New Subscriptions
+object_type: metric
+label: New Subscriptions
+description: New subscriptions started in the month (additive flow).
+calculation_method: sum
+format: '#,##0'
+unrelated_dimensions_handling: repeat
+folder: Subscription Metrics
+dataset: fact_subscription_snapshot
+column: new_subscriptions

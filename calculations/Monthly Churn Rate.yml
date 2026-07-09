@@ -1,0 +1,6 @@
+unique_name: Monthly Churn Rate
+object_type: metric_calc
+label: Monthly Churn Rate
+description: Cancellations as a share of the start-of-period active base (active + churned).
+expression: CASE WHEN ([Measures].[Active Subscriptions] + [Measures].[Churned Subscriptions]) = 0 THEN NULL ELSE [Measures].[Churned Subscriptions] / ([Measures].[Active Subscriptions] + [Measures].[Churned Subscriptions]) END
+format: percent

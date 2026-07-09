@@ -1,0 +1,6 @@
+unique_name: Net New Subscriptions Prior Period
+object_type: metric_calc
+label: Net New Subscriptions Prior Period
+description: Net new subscriptions in the prior period (month-over-month).
+expression: CASE WHEN ISEMPTY([Measures].[Net New Subscriptions]) THEN NULL ELSE ([Date Dimension].[Fiscal Calendar].CurrentMember.Lag(1), [Measures].[Net New Subscriptions]) END
+format: '#,##0'

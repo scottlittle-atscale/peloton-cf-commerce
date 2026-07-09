@@ -1,0 +1,6 @@
+unique_name: Return Rate
+object_type: metric_calc
+label: Return Rate
+description: Share of order lines returned.
+expression: CASE WHEN [Measures].[Order Count] = 0 THEN NULL ELSE [Measures].[Returned Orders] / [Measures].[Order Count] END
+format: percent

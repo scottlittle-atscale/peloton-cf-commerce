@@ -1,0 +1,6 @@
+unique_name: Net Revenue Prior Year
+object_type: metric_calc
+label: Net Revenue Prior Year
+description: Net revenue for the same fiscal period one year earlier.
+expression: CASE WHEN ISEMPTY([Measures].[Net Revenue]) THEN NULL ELSE (ParallelPeriod([Date Dimension].[Fiscal Calendar].[Fiscal Year], 1, [Date Dimension].[Fiscal Calendar].CurrentMember), [Measures].[Net Revenue]) END
+format: $#,##0.00

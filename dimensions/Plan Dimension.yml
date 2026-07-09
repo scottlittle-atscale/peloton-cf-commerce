@@ -1,0 +1,28 @@
+unique_name: Plan Dimension
+object_type: dimension
+label: Plan Dimension
+description: Plan type rolls up to plan.
+type: standard
+hierarchies:
+- unique_name: Plan Hierarchy
+  label: Plan Hierarchy
+  folder: Plan
+  levels:
+  - unique_name: Plan Type
+  - unique_name: Plan
+level_attributes:
+- unique_name: Plan Type
+  label: Plan Type
+  description: Connected Fitness / App.
+  dataset: dim_subscription_plan
+  key_columns:
+  - plan_type
+  name_column: plan_type
+- unique_name: Plan
+  label: Plan
+  description: Membership plan.
+  dataset: dim_subscription_plan
+  is_unique_key: true
+  key_columns:
+  - plan_key
+  name_column: plan_name

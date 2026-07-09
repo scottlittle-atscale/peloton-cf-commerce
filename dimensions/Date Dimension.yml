@@ -1,0 +1,118 @@
+unique_name: Date Dimension
+object_type: dimension
+label: Date Dimension
+description: Conformed date dimension. Fiscal calendar (July-June) is primary; a Gregorian calendar hierarchy is also provided. Shared Day leaf.
+type: time
+hierarchies:
+- unique_name: Fiscal Calendar
+  label: Fiscal Calendar
+  description: Fiscal year (ends June 30) > Fiscal Quarter > Fiscal Month > Day.
+  filter_empty: 'yes'
+  folder: Date
+  levels:
+  - unique_name: Fiscal Year
+  - unique_name: Fiscal Quarter
+    parallel_periods:
+    - key_columns:
+      - prior_fiscal_year_num
+      level: Fiscal Year
+  - unique_name: Fiscal Month
+    parallel_periods:
+    - key_columns:
+      - prior_fiscal_year_num
+      level: Fiscal Year
+    secondary_attributes:
+    - unique_name: Month Name
+      label: Month Name
+      description: Calendar month name within the fiscal month.
+      dataset: dim_date
+      folder: Date
+      key_columns:
+      - month_start_key
+      name_column: month_name
+  - unique_name: Day
+- unique_name: Calendar
+  label: Calendar
+  description: Gregorian calendar year > Quarter > Month > Day.
+  filter_empty: 'yes'
+  folder: Date
+  levels:
+  - unique_name: Year
+  - unique_name: Quarter
+    parallel_periods:
+    - key_columns:
+      - prior_year_num
+      level: Year
+  - unique_name: Month
+    parallel_periods:
+    - key_columns:
+      - prior_year_num
+      level: Year
+  - unique_name: Day
+level_attributes:
+- unique_name: Fiscal Year
+  label: Fiscal Year
+  description: Fiscal year ending June 30 (e.g. FY26).
+  dataset: dim_date
+  key_columns:
+  - fiscal_year
+  name_column: fiscal_year_label
+  sort_column: fiscal_year
+  time_unit: year
+- unique_name: Fiscal Quarter
+  label: Fiscal Quarter
+  description: Fiscal quarter (Q1 = Jul-Sep).
+  dataset: dim_date
+  key_columns:
+  - fiscal_year
+  - fiscal_quarter
+  name_column: fiscal_period_label
+  sort_column: fiscal_year
+  time_unit: quarter
+- unique_name: Fiscal Month
+  label: Fiscal Month
+  description: Calendar month within the fiscal year.
+  dataset: dim_date
+  key_columns:
+  - month_start_key
+  name_column: month_year_label
+  sort_column: month_start_key
+  time_unit: month
+- unique_name: Year
+  label: Year
+  description: Gregorian calendar year.
+  dataset: dim_date
+  key_columns:
+  - calendar_year
+  name_column: cal_year_name
+  sort_column: calendar_year
+  time_unit: year
+- unique_name: Quarter
+  label: Quarter
+  description: Gregorian calendar quarter.
+  dataset: dim_date
+  key_columns:
+  - calendar_year
+  - calendar_quarter
+  name_column: cal_quarter_label
+  sort_column: calendar_year
+  time_unit: quarter
+- unique_name: Month
+  label: Month
+  description: Gregorian calendar month.
+  dataset: dim_date
+  key_columns:
+  - month_start_key
+  name_column: month_year_label
+  sort_column: month_start_key
+  time_unit: month
+- unique_name: Day
+  label: Day
+  description: Calendar day (shared leaf of both hierarchies).
+  dataset: dim_date
+  is_unique_key: true
+  key_columns:
+  - date_key
+  name_column: full_date
+  sort_column: date_key
+  time_unit: day

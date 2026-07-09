@@ -1,0 +1,28 @@
+unique_name: Geography Dimension
+object_type: dimension
+label: Geography Dimension
+description: Region rolls up to country.
+type: standard
+hierarchies:
+- unique_name: Geography Hierarchy
+  label: Geography Hierarchy
+  folder: Geography
+  levels:
+  - unique_name: Region
+  - unique_name: Country
+level_attributes:
+- unique_name: Region
+  label: Region
+  description: Sales region.
+  dataset: dim_geography
+  key_columns:
+  - region
+  name_column: region
+- unique_name: Country
+  label: Country
+  description: Country.
+  dataset: dim_geography
+  is_unique_key: true
+  key_columns:
+  - geography_key
+  name_column: country

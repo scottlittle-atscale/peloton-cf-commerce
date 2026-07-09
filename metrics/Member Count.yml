@@ -1,0 +1,10 @@
+unique_name: Member Count
+object_type: metric
+label: Member Count
+description: Number of members.
+calculation_method: count non-null
+format: '#,##0'
+unrelated_dimensions_handling: repeat
+folder: Membership Metrics
+dataset: dim_member
+column: member_key

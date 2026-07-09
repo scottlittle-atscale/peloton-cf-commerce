@@ -1,0 +1,14 @@
+unique_name: Active Subscriptions
+object_type: metric
+label: Active Subscriptions
+description: 'Active subscriptions as of the snapshot (semi-additive: last over date).'
+calculation_method: sum
+format: '#,##0'
+unrelated_dimensions_handling: repeat
+semi_additive:
+  position: last
+  relationships:
+  - fact_subscription_snapshot_Date_Dimension
+folder: Subscription Metrics
+dataset: fact_subscription_snapshot
+column: active_subscriptions

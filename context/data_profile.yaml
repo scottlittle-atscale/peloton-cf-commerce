@@ -1,0 +1,615 @@
+# Tabular Data Profile — peloton_cf_commerce
+# Auto-generated column stats (seed 42) merged with authored semantics.
+dataset:
+  name: peloton_cf_commerce
+  customer: Peloton Interactive
+  warehouse: bigquery
+  currency: USD
+  window: 2023-07-01 .. 2026-06-30 (FY24-FY26)
+  grain_note: star schema; conformed dims across 3 fact tables
+tables:
+  dim_date:
+    row_count: 1096
+    grain: "One row per calendar day, 2023-07-01 .. 2026-06-30."
+    columns:
+      date_key:
+        type: INT64
+        description: YYYYMMDD surrogate key
+        primary_key: true
+        null_count: 0
+        distinct_count: 1096
+        min: 20230701.0
+        max: 20260630.0
+      full_date:
+        type: DATE
+        description: Calendar date
+        null_count: 0
+        distinct_count: 1096
+        sample_values: [2023-07-01, 2023-07-02, 2023-07-03, 2023-07-04, 2023-07-05, 2023-07-06]
+      day_of_month:
+        type: INT64
+        description: Day of month 1-31
+        null_count: 0
+        distinct_count: 31
+        min: 1.0
+        max: 31.0
+      month_number:
+        type: INT64
+        description: Calendar month 1-12
+        null_count: 0
+        distinct_count: 12
+        min: 1.0
+        max: 12.0
+      month_name:
+        type: STRING
+        description: Full month name
+        null_count: 0
+        distinct_count: 12
+        sample_values: [July, August, September, October, November, December]
+      month_start_key:
+        type: INT64
+        description: YYYYMM01 key for the month
+        null_count: 0
+        distinct_count: 36
+        min: 20230701.0
+        max: 20260601.0
+      calendar_quarter:
+        type: INT64
+        description: Calendar quarter 1-4
+        null_count: 0
+        distinct_count: 4
+        min: 1.0
+        max: 4.0
+      calendar_year:
+        type: INT64
+        description: Calendar year
+        null_count: 0
+        distinct_count: 4
+        min: 2023.0
+        max: 2026.0
+      fiscal_year:
+        type: INT64
+        description: "Fiscal year (ends June 30); Jul-Dec -> year+1"
+        null_count: 0
+        distinct_count: 3
+        min: 2024.0
+        max: 2026.0
+      fiscal_quarter:
+        type: INT64
+        description: "Fiscal quarter 1-4 (Q1 = Jul-Sep)"
+        null_count: 0
+        distinct_count: 4
+        min: 1.0
+        max: 4.0
+      fiscal_year_label:
+        type: STRING
+        description: Fiscal year label e.g. FY26
+        null_count: 0
+        distinct_count: 3
+        sample_values: [FY24, FY25, FY26]
+      fiscal_period_label:
+        type: STRING
+        description: Fiscal year+quarter label e.g. FY26 Q3
+        null_count: 0
+        distinct_count: 12
+        sample_values: [FY24 Q1, FY24 Q2, FY24 Q3, FY24 Q4, FY25 Q1, FY25 Q2]
+      is_holiday_season:
+        type: BOOL
+        description: True for November and December
+        null_count: 0
+        distinct_count: 2
+        min: 0.0
+        max: 1.0
+  dim_geography:
+    row_count: 5
+    grain: "One row per country (region -> country)."
+    columns:
+      geography_key:
+        type: INT64
+        description: Surrogate key
+        primary_key: true
+        null_count: 0
+        distinct_count: 5
+        min: 1.0
+        max: 5.0
+      region:
+        type: STRING
+        description: Sales region (North America / United Kingdom / Germany / Australia)
+        null_count: 0
+        distinct_count: 4
+        sample_values: [North America, United Kingdom, Germany, Australia]
+      country:
+        type: STRING
+        description: Country name
+        null_count: 0
+        distinct_count: 5
+        sample_values: [United States, Canada, United Kingdom, Germany, Australia]
+  dim_channel:
+    row_count: 5
+    grain: One row per sales/acquisition channel.
+    columns:
+      channel_key:
+        type: INT64
+        description: Surrogate key
+        primary_key: true
+        null_count: 0
+        distinct_count: 5
+        min: 1.0
+        max: 5.0
+      channel_name:
+        type: STRING
+        description: Channel name
+        null_count: 0
+        distinct_count: 5
+        sample_values: [Web / D2C, Retail Showroom, Phone Sales, Amazon / Marketplace, Commercial (Precor)]
+      channel_type:
+        type: STRING
+        description: Direct / Retail / Partner / Commercial
+        null_count: 0
+        distinct_count: 4
+        sample_values: [Direct, Retail, Partner, Commercial]
+  dim_subscription_plan:
+    row_count: 3
+    grain: One row per membership plan.
+    columns:
+      plan_key:
+        type: INT64
+        description: Surrogate key
+        primary_key: true
+        null_count: 0
+        distinct_count: 3
+        min: 1.0
+        max: 3.0
+      plan_name:
+        type: STRING
+        description: All-Access Membership / App+ / App One
+        null_count: 0
+        distinct_count: 3
+        sample_values: [All-Access Membership, App+, App One]
+      plan_type:
+        type: STRING
+        description: Connected Fitness / App
+        null_count: 0
+        distinct_count: 2
+        sample_values: [Connected Fitness, App]
+      monthly_price:
+        type: NUMERIC
+        description: Plan monthly price (USD)
+        null_count: 0
+        distinct_count: 3
+        min: 12.99
+        max: 44.0
+      billing_period:
+        type: STRING
+        description: Billing cadence
+        null_count: 0
+        distinct_count: 1
+        sample_values: [Monthly]
+  dim_product:
+    row_count: 15
+    grain: "One row per SKU (model x condition, plus accessories/apparel/Precor)."
+    columns:
+      product_key:
+        type: INT64
+        description: Surrogate key
+        primary_key: true
+        null_count: 0
+        distinct_count: 15
+        min: 1.0
+        max: 15.0
+      product_name:
+        type: STRING
+        description: "Model name (Bike, Bike+, Tread, Tread+, Row, ...)"
+        null_count: 0
+        distinct_count: 12
+        sample_values: [Bike, Bike+, Tread, Tread+, Row, Precor Commercial Bike]
+      product_display_name:
+        type: STRING
+        description: Display name incl. (Refurbished) suffix
+        null_count: 0
+        distinct_count: 15
+        sample_values: [Bike, Bike (Refurbished), Bike+, Bike+ (Refurbished), Tread, Tread (Refurbished)]
+      product_category:
+        type: STRING
+        description: Bike / Tread / Row / Accessory / Apparel / Precor
+        null_count: 0
+        distinct_count: 6
+        sample_values: [Bike, Tread, Row, Precor, Accessory, Apparel]
+      product_line:
+        type: STRING
+        description: Connected Fitness / Accessories / Apparel / Commercial
+        null_count: 0
+        distinct_count: 4
+        sample_values: [Connected Fitness, Commercial, Accessories, Apparel]
+      condition:
+        type: STRING
+        description: New / Refurbished / N/A
+        null_count: 5
+        distinct_count: 2
+        sample_values: [New, Refurbished]
+      is_refurbished:
+        type: BOOL
+        description: True for refurbished SKUs
+        null_count: 0
+        distinct_count: 2
+        min: 0.0
+        max: 1.0
+      list_price:
+        type: NUMERIC
+        description: List price (USD)
+        null_count: 0
+        distinct_count: 14
+        min: 90.0
+        max: 5999.0
+      launch_date:
+        type: DATE
+        description: SKU launch date; null except Tread+ (2024-01)
+        nullable: true
+        null_count: 14
+        distinct_count: 1
+        sample_values: [2024-01-01]
+  dim_member:
+    row_count: 150000
+    grain: One row per member.
+    columns:
+      member_key:
+        type: INT64
+        description: Surrogate key
+        primary_key: true
+        null_count: 0
+        distinct_count: 150000
+        min: 1.0
+        max: 150000.0
+      join_date_key:
+        type: INT64
+        description: Join date
+        foreign_key: dim_date.date_key
+        null_count: 0
+        distinct_count: 1096
+        min: 20230701.0
+        max: 20260630.0
+      join_month_key:
+        type: INT64
+        description: Join month cohort key (YYYYMM01)
+        null_count: 0
+        distinct_count: 36
+        min: 20230701.0
+        max: 20260601.0
+      geography_key:
+        type: INT64
+        description: Member geography
+        foreign_key: dim_geography.geography_key
+        null_count: 0
+        distinct_count: 5
+        min: 1.0
+        max: 5.0
+      acquisition_channel_key:
+        type: INT64
+        description: Acquisition channel
+        foreign_key: dim_channel.channel_key
+        null_count: 0
+        distinct_count: 5
+        min: 1.0
+        max: 5.0
+      plan_key:
+        type: INT64
+        description: Membership plan
+        foreign_key: dim_subscription_plan.plan_key
+        null_count: 0
+        distinct_count: 3
+        min: 1.0
+        max: 3.0
+      member_segment:
+        type: STRING
+        description: Enthusiast / Mainstream / Deal-Seeker
+        null_count: 0
+        distinct_count: 3
+        sample_values: [Mainstream, Enthusiast, Deal-Seeker]
+      initial_product_key:
+        type: INT64
+        description: First equipment SKU bought; null if none
+        foreign_key: dim_product.product_key
+        nullable: true
+        null_count: 58964
+        distinct_count: 10
+        min: 1.0
+        max: 10.0
+      tenure_months:
+        type: INT64
+        description: Months subscribed (through churn or window end)
+        null_count: 0
+        distinct_count: 36
+        min: 1.0
+        max: 36.0
+      is_active_current:
+        type: BOOL
+        description: Active as of the latest snapshot (2026-06)
+        null_count: 0
+        distinct_count: 2
+        min: 0.0
+        max: 1.0
+  fact_sales_orders:
+    row_count: 210920
+    grain: "Transaction grain: one row per order line (equipment/accessory/apparel)."
+    columns:
+      order_key:
+        type: INT64
+        description: Surrogate key
+        primary_key: true
+        null_count: 0
+        distinct_count: 210920
+        min: 1.0
+        max: 210920.0
+      member_key:
+        type: INT64
+        description: Purchasing member
+        foreign_key: dim_member.member_key
+        null_count: 0
+        distinct_count: 123523
+        min: 1.0
+        max: 150000.0
+      product_key:
+        type: INT64
+        description: Product bought
+        foreign_key: dim_product.product_key
+        null_count: 0
+        distinct_count: 15
+        min: 1.0
+        max: 15.0
+      date_key:
+        type: INT64
+        description: Order date
+        foreign_key: dim_date.date_key
+        null_count: 0
+        distinct_count: 1096
+        min: 20230701.0
+        max: 20260630.0
+      geography_key:
+        type: INT64
+        description: Ship-to geography
+        foreign_key: dim_geography.geography_key
+        null_count: 0
+        distinct_count: 5
+        min: 1.0
+        max: 5.0
+      channel_key:
+        type: INT64
+        description: Sales channel
+        foreign_key: dim_channel.channel_key
+        null_count: 0
+        distinct_count: 5
+        min: 1.0
+        max: 5.0
+      order_type:
+        type: STRING
+        description: Equipment / Accessory / Apparel
+        null_count: 0
+        distinct_count: 3
+        sample_values: [Equipment, Accessory, Apparel]
+      quantity:
+        type: INT64
+        description: Units
+        additivity: additive
+        null_count: 0
+        distinct_count: 2
+        min: 1.0
+        max: 2.0
+      unit_price:
+        type: NUMERIC
+        description: Unit list price (USD)
+        additivity: non_additive
+        null_count: 0
+        distinct_count: 14
+        min: 90.0
+        max: 5999.0
+      gross_revenue:
+        type: NUMERIC
+        description: List price x quantity
+        additivity: additive
+        null_count: 0
+        distinct_count: 19
+        min: 90.0
+        max: 5999.0
+      discount_amount:
+        type: NUMERIC
+        description: Promotional discount
+        additivity: additive
+        null_count: 0
+        distinct_count: 167
+        min: 1.8
+        max: 1019.83
+      net_revenue:
+        type: NUMERIC
+        description: Gross minus discount (not net of returns)
+        additivity: additive
+        null_count: 0
+        distinct_count: 181
+        min: 79.2
+        max: 5879.02
+      is_financed:
+        type: BOOL
+        description: Affirm financing used
+        null_count: 0
+        distinct_count: 2
+        min: 0.0
+        max: 1.0
+      is_returned:
+        type: BOOL
+        description: Order returned
+        null_count: 0
+        distinct_count: 2
+        min: 0.0
+        max: 1.0
+      returned_amount:
+        type: NUMERIC
+        description: net_revenue if returned else 0
+        additivity: additive
+        null_count: 0
+        distinct_count: 113
+        min: 0.0
+        max: 5879.02
+  fact_subscription_events:
+    row_count: 203141
+    grain: "Transaction grain: one row per lifecycle event."
+    columns:
+      event_key:
+        type: INT64
+        description: Surrogate key
+        primary_key: true
+        null_count: 0
+        distinct_count: 203141
+        min: 1.0
+        max: 203141.0
+      member_key:
+        type: INT64
+        description: Member
+        foreign_key: dim_member.member_key
+        null_count: 0
+        distinct_count: 150000
+        min: 1.0
+        max: 150000.0
+      event_date_key:
+        type: INT64
+        description: Event date
+        foreign_key: dim_date.date_key
+        null_count: 0
+        distinct_count: 1096
+        min: 20230701.0
+        max: 20260630.0
+      plan_key:
+        type: INT64
+        description: Plan
+        foreign_key: dim_subscription_plan.plan_key
+        null_count: 0
+        distinct_count: 3
+        min: 1.0
+        max: 3.0
+      geography_key:
+        type: INT64
+        description: Geography
+        foreign_key: dim_geography.geography_key
+        null_count: 0
+        distinct_count: 5
+        min: 1.0
+        max: 5.0
+      channel_key:
+        type: INT64
+        description: Acquisition channel
+        foreign_key: dim_channel.channel_key
+        null_count: 0
+        distinct_count: 5
+        min: 1.0
+        max: 5.0
+      event_type:
+        type: STRING
+        description: New Subscription / Cancellation
+        null_count: 0
+        distinct_count: 2
+        sample_values: [New Subscription, Cancellation]
+      mrr_delta:
+        type: NUMERIC
+        description: "+price on New, -price on Cancellation"
+        additivity: additive
+        null_count: 0
+        distinct_count: 6
+        min: -44.0
+        max: 44.0
+      cohort_month_key:
+        type: INT64
+        description: Member join month (YYYYMM01)
+        null_count: 0
+        distinct_count: 36
+        min: 20230701.0
+        max: 20260601.0
+      event_count:
+        type: INT64
+        description: "Event counter = 1"
+        additivity: additive
+        null_count: 0
+        distinct_count: 1
+        min: 1.0
+        max: 1.0
+  fact_subscription_snapshot:
+    row_count: 2698
+    grain: "Periodic snapshot: one row per month x plan x geography x channel."
+    columns:
+      snapshot_key:
+        type: INT64
+        description: Surrogate key
+        primary_key: true
+        null_count: 0
+        distinct_count: 2698
+        min: 1.0
+        max: 2698.0
+      snapshot_date_key:
+        type: INT64
+        description: Month-end snapshot date
+        foreign_key: dim_date.date_key
+        null_count: 0
+        distinct_count: 36
+        min: 20230731.0
+        max: 20260630.0
+      plan_key:
+        type: INT64
+        description: Plan
+        foreign_key: dim_subscription_plan.plan_key
+        null_count: 0
+        distinct_count: 3
+        min: 1.0
+        max: 3.0
+      geography_key:
+        type: INT64
+        description: Geography
+        foreign_key: dim_geography.geography_key
+        null_count: 0
+        distinct_count: 5
+        min: 1.0
+        max: 5.0
+      channel_key:
+        type: INT64
+        description: Acquisition channel
+        foreign_key: dim_channel.channel_key
+        null_count: 0
+        distinct_count: 5
+        min: 1.0
+        max: 5.0
+      active_subscriptions:
+        type: INT64
+        description: "Active subs as-of snapshot (SEMI-ADDITIVE: do not sum across snapshot_date_key)"
+        additivity: semi_additive
+        null_count: 0
+        distinct_count: 1105
+        min: 1.0
+        max: 24817.0
+      mrr:
+        type: NUMERIC
+        description: Monthly recurring revenue as-of snapshot (SEMI-ADDITIVE)
+        additivity: semi_additive
+        null_count: 0
+        distinct_count: 1564
+        min: 24.0
+        max: 1091948.0
+      new_subscriptions:
+        type: INT64
+        description: New subs in the month
+        additivity: additive
+        null_count: 0
+        distinct_count: 314
+        min: 0.0
+        max: 1365.0
+      churned_subscriptions:
+        type: INT64
+        description: Cancellations in the month
+        additivity: additive
+        null_count: 0
+        distinct_count: 175
+        min: 0.0
+        max: 602.0
+      net_new_subscriptions:
+        type: INT64
+        description: new - churned
+        additivity: additive
+        null_count: 0
+        distinct_count: 292
+        min: -153.0
+        max: 1276.0

@@ -1,0 +1,6 @@
+unique_name: Units Sold Prior Year
+object_type: metric_calc
+label: Units Sold Prior Year
+description: Units sold in the same fiscal period one year earlier.
+expression: CASE WHEN ISEMPTY([Measures].[Units Sold]) THEN NULL ELSE (ParallelPeriod([Date Dimension].[Fiscal Calendar].[Fiscal Year], 1, [Date Dimension].[Fiscal Calendar].CurrentMember), [Measures].[Units Sold]) END
+format: '#,##0'

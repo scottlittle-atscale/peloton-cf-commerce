@@ -1,0 +1,10 @@
+unique_name: Churned Subscriptions
+object_type: metric
+label: Churned Subscriptions
+description: Cancellations in the month (additive flow).
+calculation_method: sum
+format: '#,##0'
+unrelated_dimensions_handling: repeat
+folder: Subscription Metrics
+dataset: fact_subscription_snapshot
+column: churned_subscriptions

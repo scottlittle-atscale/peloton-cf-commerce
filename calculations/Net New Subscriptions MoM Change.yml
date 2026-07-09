@@ -1,0 +1,6 @@
+unique_name: Net New Subscriptions MoM Change
+object_type: metric_calc
+label: Net New Subscriptions MoM Change
+description: Change in net new subscriptions vs the prior period.
+expression: CASE WHEN ISEMPTY([Measures].[Net New Subscriptions Prior Period]) THEN NULL ELSE [Measures].[Net New Subscriptions] - [Measures].[Net New Subscriptions Prior Period] END
+format: '#,##0'

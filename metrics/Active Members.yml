@@ -1,0 +1,10 @@
+unique_name: Active Members
+object_type: metric
+label: Active Members
+description: Members active as of the latest snapshot.
+calculation_method: sum
+format: '#,##0'
+unrelated_dimensions_handling: repeat
+folder: Membership Metrics
+dataset: dim_member
+column: active_flag_int

@@ -1,0 +1,10 @@
+unique_name: Returned Orders
+object_type: metric
+label: Returned Orders
+description: Count of returned order lines.
+calculation_method: sum
+format: '#,##0'
+unrelated_dimensions_handling: repeat
+folder: Sales Metrics
+dataset: fact_sales_orders
+column: is_returned_int

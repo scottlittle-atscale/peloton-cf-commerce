@@ -1,0 +1,10 @@
+unique_name: Discount Amount
+object_type: metric
+label: Discount Amount
+description: Promotional discount dollars.
+calculation_method: sum
+format: $#,##0.00
+unrelated_dimensions_handling: repeat
+folder: Sales Metrics
+dataset: fact_sales_orders
+column: discount_amount

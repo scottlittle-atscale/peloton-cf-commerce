@@ -1,0 +1,37 @@
+unique_name: Member Dimension
+object_type: dimension
+label: Member Dimension
+description: Members grouped by behavioral segment, with membership status.
+type: standard
+hierarchies:
+- unique_name: Member Segment Hierarchy
+  label: Member Segment Hierarchy
+  folder: Member
+  levels:
+  - unique_name: Member Segment
+  - unique_name: Member
+    secondary_attributes:
+    - unique_name: Membership Status
+      label: Membership Status
+      description: Active / Churned as of the latest snapshot.
+      dataset: dim_member
+      folder: Member
+      key_columns:
+      - member_key
+      name_column: membership_status
+level_attributes:
+- unique_name: Member Segment
+  label: Member Segment
+  description: Enthusiast / Mainstream / Deal-Seeker.
+  dataset: dim_member
+  key_columns:
+  - member_segment
+  name_column: member_segment
+- unique_name: Member
+  label: Member
+  description: Individual member.
+  dataset: dim_member
+  is_unique_key: true
+  key_columns:
+  - member_key
+  name_column: member_key

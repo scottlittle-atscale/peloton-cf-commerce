@@ -1,0 +1,6 @@
+unique_name: Units Sold YoY %
+object_type: metric_calc
+label: Units Sold YoY %
+description: Year-over-year growth in units sold (fiscal).
+expression: CASE WHEN ISEMPTY([Measures].[Units Sold Prior Year]) OR [Measures].[Units Sold Prior Year] = 0 THEN NULL ELSE ([Measures].[Units Sold] - [Measures].[Units Sold Prior Year]) / [Measures].[Units Sold Prior Year] END
+format: percent

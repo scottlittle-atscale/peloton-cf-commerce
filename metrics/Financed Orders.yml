@@ -1,0 +1,10 @@
+unique_name: Financed Orders
+object_type: metric
+label: Financed Orders
+description: Count of Affirm-financed order lines.
+calculation_method: sum
+format: '#,##0'
+unrelated_dimensions_handling: repeat
+folder: Sales Metrics
+dataset: fact_sales_orders
+column: is_financed_int

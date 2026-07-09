@@ -1,0 +1,10 @@
+unique_name: Subscription Events
+object_type: metric
+label: Subscription Events
+description: Count of subscription lifecycle events.
+calculation_method: sum
+format: '#,##0'
+unrelated_dimensions_handling: repeat
+folder: Subscription Metrics
+dataset: fact_subscription_events
+column: event_count

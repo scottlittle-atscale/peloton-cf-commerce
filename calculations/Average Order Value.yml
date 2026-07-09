@@ -1,0 +1,6 @@
+unique_name: Average Order Value
+object_type: metric_calc
+label: Average Order Value
+description: Net revenue per order line.
+expression: CASE WHEN [Measures].[Order Count] = 0 THEN NULL ELSE [Measures].[Net Revenue] / [Measures].[Order Count] END
+format: $#,##0.00

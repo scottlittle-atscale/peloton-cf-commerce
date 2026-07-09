@@ -1,0 +1,7 @@
+version: 1.7
+unique_name: connected_fitness_commerce_catalog
+object_type: catalog
+label: Connected Fitness Commercial
+description: 'Connected Fitness Commercial catalog: hardware sales and subscription/membership analytics over a governed star schema on Google BigQuery. Fiscal calendar ends June 30.'
+aggressive_agg_promotion: false
+build_speculative_aggs: false

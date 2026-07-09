@@ -1,0 +1,39 @@
+unique_name: fact_subscription_events
+object_type: dataset
+label: fact_subscription_events
+description: Subscription lifecycle events (New Subscription / Cancellation) at member grain.
+connection_id: connection_connected_fitness
+table: fact_subscription_events
+columns:
+- name: event_key
+  data_type: long
+- name: member_key
+  data_type: long
+- name: event_date_key
+  data_type: long
+- name: plan_key
+  data_type: long
+- name: geography_key
+  data_type: long
+- name: channel_key
+  data_type: long
+- name: event_type
+  data_type: string
+- name: mrr_delta
+  data_type: decimal(18,2)
+- name: cohort_month_key
+  data_type: long
+- name: event_count
+  data_type: long
+- name: new_flag_int
+  data_type: long
+  sql: CASE WHEN event_type = 'New Subscription' THEN 1 ELSE 0 END
+  dialects:
+  - dialect: BigQuery
+    sql: CASE WHEN event_type = 'New Subscription' THEN 1 ELSE 0 END
+- name: cancel_flag_int
+  data_type: long
+  sql: CASE WHEN event_type = 'Cancellation' THEN 1 ELSE 0 END
+  dialects:
+  - dialect: BigQuery
+    sql: CASE WHEN event_type = 'Cancellation' THEN 1 ELSE 0 END

@@ -1,0 +1,39 @@
+unique_name: dim_member
+object_type: dataset
+label: dim_member
+description: Member master (one row per member) — also a member-grain fact for member counts and tenure.
+connection_id: connection_connected_fitness
+table: dim_member
+columns:
+- name: member_key
+  data_type: long
+- name: join_date_key
+  data_type: long
+- name: join_month_key
+  data_type: long
+- name: geography_key
+  data_type: long
+- name: acquisition_channel_key
+  data_type: long
+- name: plan_key
+  data_type: long
+- name: member_segment
+  data_type: string
+- name: initial_product_key
+  data_type: long
+- name: tenure_months
+  data_type: long
+- name: is_active_current
+  data_type: boolean
+- name: active_flag_int
+  data_type: long
+  sql: CASE WHEN is_active_current THEN 1 ELSE 0 END
+  dialects:
+  - dialect: BigQuery
+    sql: CASE WHEN is_active_current THEN 1 ELSE 0 END
+- name: membership_status
+  data_type: string
+  sql: CASE WHEN is_active_current THEN 'Active' ELSE 'Churned' END
+  dialects:
+  - dialect: BigQuery
+    sql: CASE WHEN is_active_current THEN 'Active' ELSE 'Churned' END

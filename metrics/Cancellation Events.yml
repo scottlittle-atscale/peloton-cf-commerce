@@ -1,0 +1,10 @@
+unique_name: Cancellation Events
+object_type: metric
+label: Cancellation Events
+description: Cancellation events (event grain).
+calculation_method: sum
+format: '#,##0'
+unrelated_dimensions_handling: repeat
+folder: Subscription Metrics
+dataset: fact_subscription_events
+column: cancel_flag_int

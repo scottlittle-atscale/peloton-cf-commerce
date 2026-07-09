@@ -1,0 +1,10 @@
+unique_name: Net Revenue
+object_type: metric
+label: Net Revenue
+description: Revenue net of discounts (not net of returns).
+calculation_method: sum
+format: $#,##0.00
+unrelated_dimensions_handling: repeat
+folder: Sales Metrics
+dataset: fact_sales_orders
+column: net_revenue

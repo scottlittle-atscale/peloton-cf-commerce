@@ -1,0 +1,10 @@
+unique_name: Net New Subscriptions
+object_type: metric
+label: Net New Subscriptions
+description: New minus churned (additive flow).
+calculation_method: sum
+format: '#,##0'
+unrelated_dimensions_handling: repeat
+folder: Subscription Metrics
+dataset: fact_subscription_snapshot
+column: net_new_subscriptions
